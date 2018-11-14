@@ -9,7 +9,9 @@
         "test": "echo \"Error: no test specified\" && exit 1",
         "tslint": "tslint -c tslint.json -r src/ -p ./tsconfig.json"
     },
-    "pre-commit": ["tslint"],
+    "pre-commit": [
+        "tslint"
+    ],
     "devDependencies": {
         "@types/node": "^9.3.0",
         "@types/throttle-debounce": "^1.0.0",
