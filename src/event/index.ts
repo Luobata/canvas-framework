@@ -9,8 +9,5 @@ let id: number = 0;
 export default class Event {
     public id: string;
 
-    constructor(eventType: string) {
-        this.id = `${eventType}_${id}`;
-        id = id + 1;
-    }
+    constructor() {}
 }

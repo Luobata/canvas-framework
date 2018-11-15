@@ -20,12 +20,14 @@ declare type MethodDecorator = <T>(
 ) => TypedPropertyDescriptor<T> | void;
 
 export function idDecorator(): Function {
-    return (target: idType): void => {
+    return (target: Function): void => {
+        console.log(target);
+        debugger;
         const name: string = target.constructor.name;
         if (!idCollection[name]) {
             idCollection[name] = 0;
         }
-        target.id = `${name}_${idCollection[name]}`;
+        target.prototype.id = `${name}_${idCollection[name]}`;
         idCollection[name] = idCollection[name] + 1;
     };
 }
