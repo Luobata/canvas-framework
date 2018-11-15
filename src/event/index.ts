@@ -3,7 +3,6 @@
  */
 
 import Log from '@/basic/log';
-let id: number = 0;
 /**
  * default class
  */
