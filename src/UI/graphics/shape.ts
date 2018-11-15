@@ -13,6 +13,5 @@ let id: number = 0;
 export default class Shape extends Log {
     constructor() {
         super();
-        console.log(this.id);
     }
 }

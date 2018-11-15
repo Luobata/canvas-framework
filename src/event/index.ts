@@ -2,12 +2,13 @@
  * @desc event
  */
 
+import Log from '@/basic/log';
 let id: number = 0;
 /**
  * default class
  */
-export default class Event {
-    public id: string;
-
-    constructor() {}
+export default class Event extends Log {
+    constructor() {
+        super();
+    }
 }
