@@ -14,14 +14,4 @@ export enum mouseType {
     mouseUp = 'mouse-up',
 }
 
-export const mouseTypeArr: string[] = [
-    mouseType.click,
-    mouseType.mouseDown,
-    mouseType.mouseEnter,
-    mouseType.mouseLeave,
-    mouseType.mouseMove,
-    mouseType.mouseOut,
-    mouseType.mouseOver,
-    mouseType.mouseIn,
-    mouseType.mouseUp,
-];
+export const mouseTypeArr: string[] = Object.keys(mouseType);

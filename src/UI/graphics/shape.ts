@@ -3,15 +3,16 @@
  */
 
 import Log from '@/basic/log';
-import { idDecorator } from '@/basic/util';
 import MouseEvent from '@/event/mouse';
 import { mouseTypeArr } from '@/interface/event';
+import Path from '@/UI/path';
 
 /**
  * default class
  */
 export default class Shape extends Log {
     public mouseEvent: MouseEvent;
+    public path: Path;
 
     constructor() {
         super();
@@ -22,6 +23,8 @@ export default class Shape extends Log {
     private eventInit(): void {
         this.mouseEvent = new MouseEvent();
     }
+
+    private pathInit(): void {}
 
     private on(name: string, cb: Function): void {
         if (mouseTypeArr.indexOf(name) !== -1) {
