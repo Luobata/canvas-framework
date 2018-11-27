@@ -20,6 +20,8 @@ export default class Shape extends Log {
         this.eventInit();
     }
 
+    public destroyed(): void {}
+
     private eventInit(): void {
         this.mouseEvent = new MouseEvent();
     }
