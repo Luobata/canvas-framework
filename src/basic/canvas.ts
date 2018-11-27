@@ -2,19 +2,24 @@
  * @desc 创建canvas实例
  */
 import { isString } from '@/basic/type';
+import Frame from '@/UI/frame';
 import Shape from '@/UI/graphics/shape';
 
-type context = Shape;
+export type context = Shape;
 
 export interface ICanvasConf {
     width: number;
     height: number;
 }
 
+const defaultConf: ICanvasConf = {
+    width: 200,
+    height: 100,
+};
+
 /**
  * default class
  */
-
 export default class Canvas {
     public dom: HTMLCanvasElement;
     public ctx: CanvasRenderingContext2D;
@@ -24,7 +29,9 @@ export default class Canvas {
 
     public contextList: context[] = [];
 
-    constructor(conf: ICanvasConf, dom?: string | HTMLCanvasElement) {
+    private frame: Frame;
+
+    constructor(conf?: ICanvasConf, dom?: string | HTMLCanvasElement) {
         if (dom === undefined) {
             this.dom = document.createElement('canvas');
         } else if (isString(dom)) {
@@ -35,11 +42,13 @@ export default class Canvas {
 
         this.ctx = this.dom.getContext('2d');
 
-        this.canvasInit(conf);
+        this.canvasInit(conf || defaultConf);
+        this.frame = new Frame(this.contextList);
     }
 
     public add(con: context): Canvas {
         this.contextList.push(con);
+        this.frame.update(this.contextList);
 
         return this;
     }
@@ -50,11 +59,14 @@ export default class Canvas {
         }
 
         this.contextList = [];
+        this.frame.update(this.contextList);
 
         return this;
     }
 
     public render(): Canvas {
+        this.frame.render();
+
         return this;
     }
 
