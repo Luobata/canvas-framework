@@ -2,6 +2,7 @@
  * @description rectangular.ts
  */
 import Shape from '@/UI/graphics/shape';
+import Path from '@/UI/path';
 
 interface IRectangularConfig {
     width: number;
@@ -29,9 +30,10 @@ export default class Rectangular extends Shape {
     constructor(conf: IRectangularConfig) {
         super();
         this.config = {
-            ...conf,
             ...defaultConf,
+            ...conf,
         };
+        this.pathInit();
     }
 
     public render(): void {
@@ -44,21 +46,15 @@ export default class Rectangular extends Shape {
         }
         this.ctx.beginPath();
         this.ctx.moveTo(
-            this.config.x * this.pixealRatio,
-            this.config.y * this.pixealRatio,
+            this.pixealRatio * this.path.pathList[0].x,
+            this.pixealRatio * this.path.pathList[0].y,
         );
-        this.ctx.lineTo(
-            this.pixealRatio * (this.config.x + this.config.width),
-            this.pixealRatio * this.config.y,
-        );
-        this.ctx.lineTo(
-            this.pixealRatio * (this.config.x + this.config.width),
-            this.pixealRatio * (this.config.y + this.config.height),
-        );
-        this.ctx.lineTo(
-            this.pixealRatio * this.config.x,
-            this.pixealRatio * (this.config.y + this.config.height),
-        );
+        for (let i: number = 1; i < this.path.pathList.length; i = i + 1) {
+            this.ctx.lineTo(
+                this.pixealRatio * this.path.pathList[i].x,
+                this.pixealRatio * this.path.pathList[i].y,
+            );
+        }
         this.ctx.closePath();
         if (this.config.fill) {
             this.ctx.fill();
@@ -67,5 +63,26 @@ export default class Rectangular extends Shape {
         }
 
         this.ctx.restore();
+    }
+
+    public pathInit() {
+        this.path = new Path([
+            {
+                x: this.config.x,
+                y: this.config.y,
+            },
+            {
+                x: this.config.x + this.config.width,
+                y: this.config.y,
+            },
+            {
+                x: this.config.x + this.config.width,
+                y: this.config.y + this.config.height,
+            },
+            {
+                x: this.config.x,
+                y: this.config.y + this.config.height,
+            },
+        ]);
     }
 }

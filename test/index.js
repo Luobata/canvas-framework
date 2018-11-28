@@ -1,7 +1,10 @@
 import core from '../src/index';
 
 window.onload = () => {
-    const canvas = new core.canvas();
+    const canvas = new core.canvas({
+        width: 800,
+        height: 800,
+    });
     const a = new core.rectangular();
     canvas.add(a);
 

@@ -36,11 +36,11 @@ export default class Shape extends Log {
 
     public render(): void {}
 
+    protected pathInit(): void {}
+
     private eventInit(): void {
         this.mouseEvent = new MouseEvent();
     }
-
-    private pathInit(): void {}
 
     private on(name: string, cb: Function): void {
         if (mouseTypeArr.indexOf(name) !== -1) {
