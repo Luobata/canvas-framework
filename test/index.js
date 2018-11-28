@@ -6,5 +6,6 @@ window.onload = () => {
     canvas.add(a);
 
     document.body.appendChild(canvas.dom);
+    canvas.render();
     // const b = new core.shape();
 };

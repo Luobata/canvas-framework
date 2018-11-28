@@ -47,6 +47,7 @@ export default class Canvas {
     }
 
     public add(con: context): Canvas {
+        con.bind(this.ctx, this.pixelRatio);
         this.contextList.push(con);
         this.frame.update(this.contextList);
 

@@ -14,10 +14,22 @@ export default class Shape extends Log {
     public mouseEvent: MouseEvent;
     public path: Path;
 
+    protected ctx: CanvasRenderingContext2D;
+    protected pixealRatio: number;
+
     constructor() {
         super();
 
         this.eventInit();
+    }
+
+    /**
+     * bind ctx for render
+     * @param ctx
+     */
+    public bind(ctx: CanvasRenderingContext2D, pixealRatio: number): void {
+        this.ctx = ctx;
+        this.pixealRatio = pixealRatio;
     }
 
     public destroyed(): void {}
