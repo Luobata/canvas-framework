@@ -5,7 +5,11 @@ window.onload = () => {
         width: 800,
         height: 800,
     });
-    const a = new core.rectangular();
+    const a = new core.rectangular({
+        borderColor: 'red',
+        borderWidth: 10,
+        boxSizing: 'border-box',
+    });
     canvas.add(a);
 
     document.body.appendChild(canvas.dom);

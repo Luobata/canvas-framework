@@ -4,6 +4,11 @@
 import Shape from '@/UI/graphics/shape';
 import Path from '@/UI/path';
 
+export enum boxSizing {
+    content = 'content-box',
+    border = 'border-box',
+}
+
 interface IRectangularConfig {
     width: number;
     height: number;
@@ -12,6 +17,10 @@ interface IRectangularConfig {
     backgroundColor: string;
     strokeColor: string;
     fill: boolean;
+    borderRadius?: string;
+    borderColor?: string;
+    borderWidth: number;
+    boxSizing: boxSizing;
 }
 
 const defaultConf: IRectangularConfig = {
@@ -22,6 +31,8 @@ const defaultConf: IRectangularConfig = {
     backgroundColor: 'black',
     strokeColor: 'black',
     fill: true,
+    borderWidth: 2,
+    boxSizing: boxSizing.content,
 };
 
 export default class Rectangular extends Shape {
@@ -45,6 +56,7 @@ export default class Rectangular extends Shape {
             this.ctx.strokeStyle = this.config.strokeColor;
         }
         this.ctx.beginPath();
+        // TODO border-radius
         this.ctx.moveTo(
             this.pixealRatio * this.path.pathList[0].x,
             this.pixealRatio * this.path.pathList[0].y,
@@ -61,27 +73,44 @@ export default class Rectangular extends Shape {
         } else {
             this.ctx.stroke();
         }
+        if (this.config.borderColor) {
+            this.ctx.strokeStyle = this.config.borderColor;
+            this.ctx.lineWidth = this.config.borderWidth;
+            this.ctx.stroke();
+        }
 
         this.ctx.restore();
     }
 
     public pathInit() {
+        const border: number = this.config.borderColor
+            ? this.config.borderWidth / 2
+            : 0;
+        const width: number =
+            this.config.boxSizing === boxSizing.content
+                ? this.config.width + border
+                : this.config.width - border;
+        const height: number =
+            this.config.boxSizing === boxSizing.content
+                ? this.config.height + border
+                : this.config.height - border;
+        // 类似border-box content-box border的宽度会增加整体宽度
         this.path = new Path([
             {
-                x: this.config.x,
-                y: this.config.y,
+                x: this.config.x + border,
+                y: this.config.y + border,
             },
             {
-                x: this.config.x + this.config.width,
-                y: this.config.y,
+                x: this.config.x + width,
+                y: this.config.y + border,
             },
             {
-                x: this.config.x + this.config.width,
-                y: this.config.y + this.config.height,
+                x: this.config.x + width,
+                y: this.config.y + height,
             },
             {
-                x: this.config.x,
-                y: this.config.y + this.config.height,
+                x: this.config.x + border,
+                y: this.config.y + height,
             },
         ]);
     }
