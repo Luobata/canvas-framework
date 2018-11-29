@@ -82,7 +82,7 @@ export default class Rectangular extends Shape {
         this.ctx.restore();
     }
 
-    public pathInit() {
+    protected pathInit() {
         const border: number = this.config.borderColor
             ? this.config.borderWidth / 2
             : 0;

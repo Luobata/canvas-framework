@@ -3,13 +3,16 @@
  */
 import Event from '@/event/';
 import { mouseType } from '@/interface/event';
-import { ShapeType } from '@/interface/shape';
+import Shape from '@/UI/graphics/shape';
+import EventCenter from '@/event/event-center';
+
+const MouseCenter = new EventCenter();
 
 export default class MouseEvent extends Event {
-    public target: ShapeType;
+    constructor(target: Shape) {
+        super(target);
 
-    constructor() {
-        super();
+        MouseCenter.addTarget(target);
     }
 
     public inMouseType(name: string): void {}

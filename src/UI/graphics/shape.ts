@@ -39,7 +39,7 @@ export default class Shape extends Log {
     protected pathInit(): void {}
 
     private eventInit(): void {
-        this.mouseEvent = new MouseEvent();
+        this.mouseEvent = new MouseEvent(this);
     }
 
     private on(name: string, cb: Function): void {
