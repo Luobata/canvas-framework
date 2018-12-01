@@ -16,7 +16,7 @@ interface eventType {
  * default class
  */
 export default class EventCenter {
-    protected targets: Shape[];
+    protected targets: Shape[] = [];
     protected canvas: Canvas;
 
     constructor(canvas: Canvas) {
