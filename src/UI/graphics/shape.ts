@@ -5,7 +5,7 @@
 import Log from '@/basic/log';
 import Canvas from '@/basic/canvas';
 import MouseEvent from '@/event/mouse';
-import { mouseTypeArr } from '@/interface/event';
+import { mouseType, isMouseType } from '@/interface/event';
 import Path from '@/UI/path';
 import EventCenter from '@/event/event-center';
 
@@ -46,7 +46,7 @@ export default class Shape extends Log {
     }
 
     private on(name: string, cb: Function): void {
-        if (mouseTypeArr.indexOf(name) !== -1) {
+        if (isMouseType(name)) {
             this.mouseEvent.on(name, cb);
         }
     }
