@@ -1,9 +1,11 @@
 /**
  * @desc event center for dispatch event
+ * 每一个canvas对应一个eventCenter 只应该被在canvas初始化的时候被实例化一次
  */
 
 import Shape from '@/UI/graphics/shape';
 import { mouseType, mouseTypeArr } from '@/interface/event';
+import Canvas from '@/basic/canvas';
 
 type event = keyof mouseType;
 
@@ -15,8 +17,10 @@ interface eventType {
  */
 export default class EventCenter {
     protected targets: Shape[];
+    protected canvas: Canvas;
 
-    constructor() {
+    constructor(canvas: Canvas) {
+        this.canvas = canvas;
         this.init();
     }
 
@@ -36,7 +40,10 @@ export default class EventCenter {
         mouseTypeArr.map(
             (v: string): void => {
                 // TODO: document 改成cansvas 怎么把canvas绑定到当前节点上
-                document.addEventListener(v, (me: MouseEvent): void => {});
+                this.canvas.dom.addEventListener(
+                    v,
+                    (me: MouseEvent): void => {},
+                );
             },
         );
     }

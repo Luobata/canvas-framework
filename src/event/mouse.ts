@@ -6,13 +6,14 @@ import { mouseType } from '@/interface/event';
 import Shape from '@/UI/graphics/shape';
 import EventCenter from '@/event/event-center';
 
-const MouseCenter = new EventCenter();
-
 export default class MouseEvent extends Event {
-    constructor(target: Shape) {
+    private mouseCenter: EventCenter;
+
+    constructor(target: Shape, center: EventCenter) {
         super(target);
 
-        MouseCenter.addTarget(target);
+        this.mouseCenter = center;
+        this.mouseCenter.addTarget(target);
     }
 
     public inMouseType(name: string): void {}

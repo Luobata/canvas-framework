@@ -4,6 +4,7 @@
 import { isString } from '@/basic/type';
 import Frame from '@/UI/frame';
 import Shape from '@/UI/graphics/shape';
+import EventCenter from '@/event/event-center';
 
 export type context = Shape;
 
@@ -26,6 +27,7 @@ export default class Canvas {
     public width: number;
     public height: number;
     public pixelRatio: number;
+    public eventCenter: EventCenter;
 
     public contextList: context[] = [];
 
@@ -44,10 +46,12 @@ export default class Canvas {
 
         this.canvasInit(conf || defaultConf);
         this.frame = new Frame(this.contextList);
+
+        this.eventCenter = new EventCenter(this);
     }
 
     public add(con: context): Canvas {
-        con.bind(this.ctx, this.pixelRatio);
+        con.bind(this, this.pixelRatio);
         this.contextList.push(con);
         this.frame.update(this.contextList);
 
