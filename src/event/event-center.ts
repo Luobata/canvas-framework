@@ -3,18 +3,19 @@
  * 每一个canvas对应一个eventCenter 只应该被在canvas初始化的时候被实例化一次
  */
 
-import Shape from '@/UI/graphics/shape';
-import { mouseTypeArr } from '@/interface/event';
 import Canvas from '@/basic/canvas';
+import { event, mouseType, mouseTypeArr, keybordType } from '@/interface/event';
+import Shape from '@/UI/graphics/shape';
 
-type event = 'mouse' | 'keybord';
 // type event = keyof mouseType;
 
 // TODO 如何限制interface只能为由mouseType moueTypeArr中的字符串作为key的event
 type eventType = {
-    [K in event]?: {
-        [key: string]: Shape[];
-    }
+    mouse: { [key in mouseType]?: Shape[] };
+    keybord: { [key in keybordType]?: Shape[] };
+    // [K in event]?: {
+    //     [key: string]: Shape[];
+    // }
 };
 /**
  * default class
@@ -30,13 +31,13 @@ export default class EventCenter {
         this.init();
     }
 
-    public cleanTargets(type: event = 'mouse'): void {
+    public cleanTargets(types: event = 'mouse'): void {
         this.targets = [];
     }
 
-    public addTarget(shape: Shape, type: event = 'mouse'): void {
+    public addTarget(shape: Shape, types: event = 'mouse'): void {
         this.targets.push(shape);
-        if (this.eventDispatchList[type]) {
+        if (this.eventDispatchList[types]) {
             // this.eventDispatchList[type].push(shape)
         }
     }
@@ -46,6 +47,7 @@ export default class EventCenter {
     public init(): void {
         this.eventDispatchList = {
             mouse: {},
+            keybord: {},
         };
         // TODO 是否需要节流
         // TODO 是否需要拆开绑定
