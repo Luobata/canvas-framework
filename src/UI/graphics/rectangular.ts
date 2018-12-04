@@ -35,6 +35,9 @@ const defaultConf: IRectangularConfig = {
     boxSizing: boxSizing.content,
 };
 
+/**
+ * default class
+ */
 export default class Rectangular extends Shape {
     public config: IRectangularConfig;
 
@@ -82,7 +85,7 @@ export default class Rectangular extends Shape {
         this.ctx.restore();
     }
 
-    protected pathInit() {
+    protected pathInit(): void {
         const border: number = this.config.borderColor
             ? this.config.borderWidth / 2
             : 0;

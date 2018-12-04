@@ -2,6 +2,7 @@
  * @description judge point is inner the Polygon
  * ray-cross 算法
  */
+// tslint:disable no-any no-unsafe-any
 
 import { IPoint, IPointList, isIPoint } from '@/interface/point';
 import { isArray } from 'util';

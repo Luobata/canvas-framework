@@ -2,12 +2,12 @@
  * @desc 图形的父类
  */
 
-import Log from '@/basic/log';
 import Canvas from '@/basic/canvas';
-import MouseEvent from '@/event/mouse';
-import { mouseType, isMouseType } from '@/interface/event';
-import Path from '@/UI/path';
+import Log from '@/basic/log';
 import EventCenter from '@/event/event-center';
+import MouseEvent from '@/event/mouse';
+import { isMouseType, mouseType } from '@/interface/event';
+import Path from '@/UI/path';
 
 /**
  * default class
@@ -26,7 +26,7 @@ export default class Shape extends Log {
 
     /**
      * bind ctx for render
-     * @param ctx
+     * @param canvas Canvas class for binding
      */
     public bind(canvas: Canvas, pixealRatio: number): void {
         this.ctx = canvas.ctx;
@@ -35,11 +35,17 @@ export default class Shape extends Log {
         this.eventInit(canvas.eventCenter);
     }
 
-    public destroyed(): void {}
+    public destroyed(): void {
+        // TODO destroyed
+    }
 
-    public render(): void {}
+    public render(): void {
+        // TODO render
+    }
 
-    protected pathInit(): void {}
+    protected pathInit(): void {
+        // TODO pathInit
+    }
 
     private eventInit(eventCenter: EventCenter): void {
         this.mouseEvent = new MouseEvent(this, eventCenter);

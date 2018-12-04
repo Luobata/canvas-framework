@@ -1,3 +1,0 @@
-/**
- * @description interface.ts
- */

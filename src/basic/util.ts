@@ -1,6 +1,7 @@
 /**
  * @desc util
  */
+// tslint:disable no-any no-unsafe-any
 
 import Shape from '@/UI/graphics/shape';
 
@@ -21,8 +22,6 @@ declare type MethodDecorator = <T>(
 
 export function idDecorator(): Function {
     return (target: Function): void => {
-        console.log(target);
-        debugger;
         const name: string = target.constructor.name;
         if (!idCollection[name]) {
             idCollection[name] = 0;

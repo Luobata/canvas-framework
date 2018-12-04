@@ -4,7 +4,7 @@
  */
 
 import Canvas from '@/basic/canvas';
-import { event, mouseType, mouseTypeArr, keybordType } from '@/interface/event';
+import { event, keybordType, mouseType, mouseTypeArr } from '@/interface/event';
 import Shape from '@/UI/graphics/shape';
 
 // type event = keyof mouseType;
@@ -42,7 +42,9 @@ export default class EventCenter {
         }
     }
 
-    public addEvent(name: string, cb: Function): void {}
+    public addEvent(name: string, cb: Function): void {
+        // TODO addEvent
+    }
 
     public init(): void {
         this.eventDispatchList = {
@@ -56,7 +58,9 @@ export default class EventCenter {
                 // TODO: document 改成cansvas 怎么把canvas绑定到当前节点上
                 this.canvas.dom.addEventListener(
                     v,
-                    (me: MouseEvent): void => {},
+                    (me: MouseEvent): void => {
+                        // TODO eventHandler
+                    },
                 );
             },
         );

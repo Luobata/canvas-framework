@@ -2,9 +2,9 @@
  * @desc 创建canvas实例
  */
 import { isString } from '@/basic/type';
+import EventCenter from '@/event/event-center';
 import Frame from '@/UI/frame';
 import Shape from '@/UI/graphics/shape';
-import EventCenter from '@/event/event-center';
 
 export type context = Shape;
 

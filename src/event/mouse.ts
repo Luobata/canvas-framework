@@ -2,10 +2,13 @@
  * @desc mouse 事件
  */
 import Event from '@/event/';
+import EventCenter from '@/event/event-center';
 import { mouseType } from '@/interface/event';
 import Shape from '@/UI/graphics/shape';
-import EventCenter from '@/event/event-center';
 
+/**
+ * default class
+ */
 export default class MouseEvent extends Event {
     private mouseCenter: EventCenter;
 
@@ -16,7 +19,11 @@ export default class MouseEvent extends Event {
         this.mouseCenter.addTarget(target);
     }
 
-    public inMouseType(name: string): void {}
+    public inMouseType(name: string): void {
+        // TODO in
+    }
 
-    public on(name: string, cb: Function): void {}
+    public on(name: string, cb: Function): void {
+        // TODO on
+    }
 }

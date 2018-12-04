@@ -8,7 +8,7 @@ import { IPoint } from '@/interface/point';
  * default class
  */
 export default class Path {
-    // IPoint为原始数据 即不带pixelRatio
+    // 这里IPoint为原始数据 即不带pixelRatio
     public pathList: IPoint[] = [];
 
     constructor(path: IPoint[]) {

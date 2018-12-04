@@ -3,12 +3,13 @@
  */
 import { context } from '@/basic/canvas';
 
-/**
- * default class
- */
 export interface IFrameConf {
     framePerSecond?: number;
 }
+
+/**
+ * default class
+ */
 export default class Frame {
     public contextList: context[] = [];
 
