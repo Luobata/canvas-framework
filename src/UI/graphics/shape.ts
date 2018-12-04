@@ -60,6 +60,16 @@ export default class Shape extends Log {
         }
     }
 
+    public off(name: string, cb: Function): void {
+        if (!this.mouseEvent) {
+            return;
+        }
+
+        if (isMouseType(name)) {
+            this.mouseEvent.off(name, cb);
+        }
+    }
+
     public destroyed(): void {
         // TODO destroyed
     }

@@ -62,6 +62,31 @@ export default class EventCenter {
         }
     }
 
+    public removeTarget(
+        shape: Shape,
+        types: event = 'mouse',
+        eventTypes: mouseType | keybordType,
+        cb: Function,
+    ): void {
+        if (this.eventDispatchList[types][eventTypes]) {
+            for (
+                let i: number = 0;
+                i < this.eventDispatchList[types][eventTypes].length;
+
+            ) {
+                const item: IShapeEventHandler = this.eventDispatchList[types][
+                    eventTypes
+                ][i];
+                if (item.handler === cb && item.shape === shape) {
+                    this.eventDispatchList[types][eventTypes].splice(i, 1);
+                    break;
+                } else {
+                    i = i + 1;
+                }
+            }
+        }
+    }
+
     public addEvent(name: string, cb: Function): void {
         // TODO addEvent
     }

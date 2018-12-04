@@ -24,6 +24,9 @@ export default class MouseEvent extends Event {
 
     public on(name: mouseType, cb: Function): void {
         this.mouseCenter.addTarget(this.target, 'mouse', name, cb);
-        // TODO on
+    }
+
+    public off(name: mouseType, cb: Function): void {
+        this.mouseCenter.removeTarget(this.target, 'mouse', name, cb);
     }
 }

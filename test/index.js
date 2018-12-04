@@ -10,9 +10,14 @@ window.onload = () => {
         borderWidth: 10,
         boxSizing: 'border-box',
     });
-    a.on('click', data => {
+    const fn = data => {
         console.log(data);
-    });
+        a.off('click', fn);
+    };
+    // a.on('click', data => {
+    //     console.log(data);
+    // });
+    a.on('click', fn);
     canvas.add(a);
 
     document.body.appendChild(canvas.dom);
