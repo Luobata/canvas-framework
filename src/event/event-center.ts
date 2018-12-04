@@ -7,15 +7,20 @@ import Canvas from '@/basic/canvas';
 import { event, keybordType, mouseType, mouseTypeArr } from '@/interface/event';
 import Shape from '@/UI/graphics/shape';
 
+interface IShapeEventHandler {
+    shape: Shape;
+    handler: Function;
+}
+
 // type event = keyof mouseType;
 
 // TODO 如何限制interface只能为由mouseType moueTypeArr中的字符串作为key的event
 type eventType = {
-    mouse: { [key in mouseType]?: Shape[] };
-    keybord: { [key in keybordType]?: Shape[] };
-    // [K in event]?: {
-    //     [key: string]: Shape[];
-    // }
+    // mouse: { [key in mouseType]?: Shape[] };
+    // keybord: { [key in keybordType]?: Shape[] };
+    [K in event]?: {
+        [key: string]: IShapeEventHandler[];
+    }
 };
 /**
  * default class
@@ -35,10 +40,25 @@ export default class EventCenter {
         this.targets = [];
     }
 
-    public addTarget(shape: Shape, types: event = 'mouse'): void {
+    public addTarget(
+        shape: Shape,
+        types: event = 'mouse',
+        eventTypes: mouseType | keybordType,
+        cb: Function,
+    ): void {
         this.targets.push(shape);
-        if (this.eventDispatchList[types]) {
-            // this.eventDispatchList[type].push(shape)
+        if (this.eventDispatchList[types][eventTypes]) {
+            this.eventDispatchList[types][eventTypes].push({
+                shape,
+                handler: cb,
+            });
+        } else {
+            this.eventDispatchList[types][eventTypes] = [
+                {
+                    shape,
+                    handler: cb,
+                },
+            ];
         }
     }
 
@@ -59,6 +79,11 @@ export default class EventCenter {
                 this.canvas.dom.addEventListener(
                     v,
                     (me: MouseEvent): void => {
+                        if (this.eventDispatchList.mouse[v].length) {
+                            for (const i of this.eventDispatchList.mouse[v]) {
+                                i.handler.call(null, me);
+                            }
+                        }
                         // TODO eventHandler
                     },
                 );

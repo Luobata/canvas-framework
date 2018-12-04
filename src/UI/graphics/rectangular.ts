@@ -1,6 +1,8 @@
 /**
  * @description rectangular.ts
  */
+import { IPoint } from '@/interface/point';
+import pointInnerPolygon from '@/UI/geomathic/point-inner-polygon';
 import Shape from '@/UI/graphics/shape';
 import Path from '@/UI/path';
 
@@ -48,6 +50,17 @@ export default class Rectangular extends Shape {
             ...conf,
         };
         this.pathInit();
+    }
+
+    public onShape(p: IPoint): boolean {
+        return pointInnerPolygon(p, this.path.pathList);
+    }
+
+    /**
+     * 按照顺时针排序
+     */
+    public srot(): void {
+        // TODO sort
     }
 
     public render(): void {

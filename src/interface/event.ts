@@ -54,3 +54,8 @@ export function isMouseType(value: any): value is mouseType {
 export type event = 'mouse' | 'keybord';
 
 export type keybordType = 'input';
+
+export interface IeventHandler {
+    name: string;
+    handler: Function;
+}

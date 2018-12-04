@@ -53,8 +53,8 @@ export const windingNumber: Function = (
     p: IPoint,
     polygon: IPointList,
 ): boolean => {
-    const point: IPoint = isIPoint(p) ? p : p.point;
-    const pointList: IPointList = isArray(polygon) ? polygon : polygon.list;
+    const point: IPoint = p;
+    const pointList: IPointList = polygon;
 
     return true;
 };

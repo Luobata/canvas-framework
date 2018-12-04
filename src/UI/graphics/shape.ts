@@ -6,7 +6,7 @@ import Canvas from '@/basic/canvas';
 import Log from '@/basic/log';
 import EventCenter from '@/event/event-center';
 import MouseEvent from '@/event/mouse';
-import { isMouseType, mouseType } from '@/interface/event';
+import { IeventHandler, isMouseType, mouseType } from '@/interface/event';
 import Path from '@/UI/path';
 
 /**
@@ -19,6 +19,8 @@ export default class Shape extends Log {
 
     protected ctx: CanvasRenderingContext2D;
     protected pixealRatio: number;
+
+    private eventCache: IeventHandler[] = [];
 
     constructor() {
         super();
@@ -33,6 +35,29 @@ export default class Shape extends Log {
         this.pixealRatio = pixealRatio;
         // this.eventCenter = canvas.mouseCenter;
         this.eventInit(canvas.eventCenter);
+        // 如果有cache拿出来
+        if (this.eventCache.length) {
+            for (const i of this.eventCache) {
+                this.on(i.name, i.handler);
+            }
+            this.eventCache = [];
+        }
+    }
+
+    public on(name: string, cb: Function): void {
+        // 兼容如果在bind之前先绑定事件的情况
+
+        if (!this.mouseEvent) {
+            this.eventCache.push({
+                name,
+                handler: cb,
+            });
+
+            return;
+        }
+        if (isMouseType(name)) {
+            this.mouseEvent.on(name, cb);
+        }
     }
 
     public destroyed(): void {
@@ -49,11 +74,5 @@ export default class Shape extends Log {
 
     private eventInit(eventCenter: EventCenter): void {
         this.mouseEvent = new MouseEvent(this, eventCenter);
-    }
-
-    private on(name: string, cb: Function): void {
-        if (isMouseType(name)) {
-            this.mouseEvent.on(name, cb);
-        }
     }
 }

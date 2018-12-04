@@ -16,14 +16,14 @@ export default class MouseEvent extends Event {
         super(target);
 
         this.mouseCenter = center;
-        this.mouseCenter.addTarget(target);
     }
 
     public inMouseType(name: string): void {
         // TODO in
     }
 
-    public on(name: string, cb: Function): void {
+    public on(name: mouseType, cb: Function): void {
+        this.mouseCenter.addTarget(this.target, 'mouse', name, cb);
         // TODO on
     }
 }
