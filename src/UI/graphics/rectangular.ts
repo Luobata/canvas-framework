@@ -138,16 +138,17 @@ export default class Rectangular extends Shape {
     private renderRadius(): void {
         const min: number = Math.min(this.config.width, this.config.height);
         const radius: number =
-            this.config.borderRadius > min / 2
+            (this.config.borderRadius > min / 2
                 ? min / 2
-                : this.config.borderRadius;
-        this.ctx.moveTo(
-            this.pixealRatio * this.path.pathList[0].x,
-            this.pixealRatio * this.path.pathList[0].y,
-        );
+                : this.config.borderRadius) * this.pixealRatio;
+        let x!: number;
+        let y!: number;
+        x = this.pixealRatio * this.path.pathList[0].x;
+        y = this.pixealRatio * this.path.pathList[0].y;
+        this.ctx.moveTo(x + radius, y);
 
-        let x: number = this.pixealRatio * this.path.pathList[1].x;
-        let y: number = this.pixealRatio * this.path.pathList[1].y;
+        x = this.pixealRatio * this.path.pathList[1].x;
+        y = this.pixealRatio * this.path.pathList[1].y;
         this.ctx.lineTo(x - radius, y);
         this.ctx.arc(
             x - radius,
