@@ -6,8 +6,9 @@ window.onload = () => {
         height: 800,
     });
     const a = new core.rectangular({
-        borderColor: 'red',
+        // borderColor: 'red',
         borderWidth: 10,
+        borderRadius: 5,
         boxSizing: 'border-box',
     });
     const fn = data => {

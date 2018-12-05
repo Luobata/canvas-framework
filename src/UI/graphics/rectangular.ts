@@ -19,7 +19,7 @@ interface IRectangularConfig {
     backgroundColor: string;
     strokeColor: string;
     fill: boolean;
-    borderRadius?: string;
+    borderRadius?: number;
     borderColor?: string;
     borderWidth: number;
     boxSizing: boxSizing;
@@ -72,16 +72,20 @@ export default class Rectangular extends Shape {
             this.ctx.strokeStyle = this.config.strokeColor;
         }
         this.ctx.beginPath();
-        // TODO border-radius
-        this.ctx.moveTo(
-            this.pixealRatio * this.path.pathList[0].x,
-            this.pixealRatio * this.path.pathList[0].y,
-        );
-        for (let i: number = 1; i < this.path.pathList.length; i = i + 1) {
-            this.ctx.lineTo(
-                this.pixealRatio * this.path.pathList[i].x,
-                this.pixealRatio * this.path.pathList[i].y,
+        // border-radius
+        if (this.config.borderRadius) {
+            this.renderRadius();
+        } else {
+            this.ctx.moveTo(
+                this.pixealRatio * this.path.pathList[0].x,
+                this.pixealRatio * this.path.pathList[0].y,
             );
+            for (let i: number = 1; i < this.path.pathList.length; i = i + 1) {
+                this.ctx.lineTo(
+                    this.pixealRatio * this.path.pathList[i].x,
+                    this.pixealRatio * this.path.pathList[i].y,
+                );
+            }
         }
         this.ctx.closePath();
         if (this.config.fill) {
@@ -129,5 +133,65 @@ export default class Rectangular extends Shape {
                 y: this.config.y + height,
             },
         ]);
+    }
+
+    private renderRadius(): void {
+        const min: number = Math.min(this.config.width, this.config.height);
+        const radius: number =
+            this.config.borderRadius > min / 2
+                ? min / 2
+                : this.config.borderRadius;
+        this.ctx.moveTo(
+            this.pixealRatio * this.path.pathList[0].x,
+            this.pixealRatio * this.path.pathList[0].y,
+        );
+
+        let x: number = this.pixealRatio * this.path.pathList[1].x;
+        let y: number = this.pixealRatio * this.path.pathList[1].y;
+        this.ctx.lineTo(x - radius, y);
+        this.ctx.arc(
+            x - radius,
+            y + radius,
+            radius,
+            (Math.PI / 180) * 270,
+            0,
+            false,
+        );
+
+        x = this.pixealRatio * this.path.pathList[2].x;
+        y = this.pixealRatio * this.path.pathList[2].y;
+        this.ctx.lineTo(x, y - radius);
+        this.ctx.arc(
+            x - radius,
+            y - radius,
+            radius,
+            0,
+            (Math.PI / 180) * 90,
+            false,
+        );
+
+        x = this.pixealRatio * this.path.pathList[3].x;
+        y = this.pixealRatio * this.path.pathList[3].y;
+        this.ctx.lineTo(x + radius, y);
+        this.ctx.arc(
+            x + radius,
+            y - radius,
+            radius,
+            (Math.PI / 180) * 90,
+            (Math.PI / 180) * 180,
+            false,
+        );
+
+        x = this.pixealRatio * this.path.pathList[0].x;
+        y = this.pixealRatio * this.path.pathList[0].y;
+        this.ctx.lineTo(x, y + radius);
+        this.ctx.arc(
+            x + radius,
+            y + radius,
+            radius,
+            (Math.PI / 180) * 180,
+            (Math.PI / 180) * 270,
+            false,
+        );
     }
 }
