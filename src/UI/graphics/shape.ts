@@ -13,7 +13,7 @@ import { IPoint } from '@/interface/point';
 /**
  * default class
  */
-export default class Shape extends Log {
+export default abstract class Shape extends Log {
     public mouseEvent: MouseEvent;
     // public eventCenter: EventCenter;
     public path: Path;
@@ -74,21 +74,13 @@ export default class Shape extends Log {
         }
     }
 
-    public onShape(p: IPoint): boolean {
-        return true;
-    }
+    public abstract onShape(p: IPoint): boolean;
 
-    public destroyed(): void {
-        // TODO destroyed
-    }
+    public abstract destroyed(): void;
 
-    public render(): void {
-        // TODO render
-    }
+    public abstract render(): void;
 
-    protected pathInit(): void {
-        // TODO pathInit
-    }
+    protected abstract pathInit(): void;
 
     private eventInit(eventCenter: EventCenter): void {
         this.mouseEvent = new MouseEvent(this, eventCenter);

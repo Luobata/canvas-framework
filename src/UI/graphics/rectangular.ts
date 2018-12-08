@@ -56,6 +56,10 @@ export default class Rectangular extends Shape {
         return pointInnerPolygon(p, this.path.pathList);
     }
 
+    public destroyed(): void {
+        // TODO destroyed
+    }
+
     /**
      * 按照顺时针排序
      */
