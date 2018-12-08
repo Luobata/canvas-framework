@@ -15,13 +15,15 @@ import { IPoint } from '@/interface/point';
  */
 export default abstract class Shape extends Log {
     public mouseEvent: MouseEvent;
-    // public eventCenter: EventCenter;
     public path: Path;
 
     protected ctx: CanvasRenderingContext2D;
     protected pixealRatio: number;
 
+    // eventCache用于在canvas实例化绑定之前存储事件
     private eventCache: IeventHandler[] = [];
+    // eventList用于存储所有绑定的事件
+    private eventList: IeventHandler[] = [];
 
     constructor() {
         super();
@@ -34,7 +36,6 @@ export default abstract class Shape extends Log {
     public bind(canvas: Canvas, pixealRatio: number): void {
         this.ctx = canvas.ctx;
         this.pixealRatio = pixealRatio;
-        // this.eventCenter = canvas.mouseCenter;
         this.eventInit(canvas.eventCenter);
         // 如果有cache拿出来
         if (this.eventCache.length) {
@@ -45,6 +46,11 @@ export default abstract class Shape extends Log {
         }
     }
 
+    /**
+     * event on
+     * @param name event-name
+     * @param cb event-callback
+     */
     public on(name: string, cb: Function): void {
         // 兼容如果在bind之前先绑定事件的情况
 
@@ -57,6 +63,10 @@ export default abstract class Shape extends Log {
             return;
         }
         if (isMouseType(name)) {
+            this.eventList.push({
+                name,
+                handler: cb,
+            });
             this.mouseEvent.on(name, cb);
             return;
         }
@@ -64,6 +74,11 @@ export default abstract class Shape extends Log {
         throw new Error(`${name} is a illegal event name.`);
     }
 
+    /**
+     * event off
+     * @param name event-name
+     * @param cb event-callback
+     */
     public off(name: string, cb: Function): void {
         if (!this.mouseEvent) {
             return;
@@ -74,14 +89,40 @@ export default abstract class Shape extends Log {
         }
     }
 
+    /**
+     * shape destroy off all the eventList
+     */
+    public destroyed(): void {
+        for (const i of this.eventList) {
+            this.off(i.name, i.handler);
+        }
+
+        this.eventList = [];
+    }
+
+    /**
+     * abstract method
+     * judge point is on the shape
+     * @param p point with mouse
+     */
     public abstract onShape(p: IPoint): boolean;
 
-    public abstract destroyed(): void;
-
+    /**
+     * abstract method
+     * render the shape
+     */
     public abstract render(): void;
 
+    /**
+     * abstract method
+     * init the path
+     */
     protected abstract pathInit(): void;
 
+    /**
+     * init all the event
+     * @param eventCenter event-center
+     */
     private eventInit(eventCenter: EventCenter): void {
         this.mouseEvent = new MouseEvent(this, eventCenter);
     }
