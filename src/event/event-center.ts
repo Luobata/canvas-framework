@@ -26,7 +26,7 @@ type eventType = {
  * default class
  */
 export default class EventCenter {
-    protected targets: Shape[] = [];
+    // protected targets: Shape[] = [];
     protected canvas: Canvas;
 
     private eventDispatchList: eventType;
@@ -36,9 +36,9 @@ export default class EventCenter {
         this.init();
     }
 
-    public cleanTargets(types: event = 'mouse'): void {
-        this.targets = [];
-    }
+    // public cleanTargets(types: event = 'mouse'): void {
+    //     this.targets = [];
+    // }
 
     public addTarget(
         shape: Shape,
@@ -46,7 +46,7 @@ export default class EventCenter {
         eventTypes: mouseType | keybordType,
         cb: Function,
     ): void {
-        this.targets.push(shape);
+        // this.targets.push(shape);
         if (this.eventDispatchList[types][eventTypes]) {
             this.eventDispatchList[types][eventTypes].push({
                 shape,
@@ -100,16 +100,22 @@ export default class EventCenter {
         // TODO 是否需要拆开绑定
         mouseTypeArr.map(
             (v: string): void => {
-                // TODO: document 改成cansvas 怎么把canvas绑定到当前节点上
                 this.canvas.dom.addEventListener(
                     v,
                     (me: MouseEvent): void => {
                         if (this.eventDispatchList.mouse[v].length) {
                             for (const i of this.eventDispatchList.mouse[v]) {
-                                i.handler.call(null, me);
+                                // TODO point的计算计算方式 应该相对成canvas的位置 可能需要调整
+                                if (
+                                    i.shape.onShape({
+                                        x: me.offsetX,
+                                        y: me.offsetY,
+                                    })
+                                ) {
+                                    i.handler.call(null, me);
+                                }
                             }
                         }
-                        // TODO eventHandler
                     },
                 );
             },

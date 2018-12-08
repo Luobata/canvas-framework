@@ -8,6 +8,7 @@ import EventCenter from '@/event/event-center';
 import MouseEvent from '@/event/mouse';
 import { IeventHandler, isMouseType, mouseType } from '@/interface/event';
 import Path from '@/UI/path';
+import { IPoint } from '@/interface/point';
 
 /**
  * default class
@@ -57,7 +58,10 @@ export default class Shape extends Log {
         }
         if (isMouseType(name)) {
             this.mouseEvent.on(name, cb);
+            return;
         }
+
+        throw new Error(`${name} is a illegal event name.`);
     }
 
     public off(name: string, cb: Function): void {
@@ -68,6 +72,10 @@ export default class Shape extends Log {
         if (isMouseType(name)) {
             this.mouseEvent.off(name, cb);
         }
+    }
+
+    public onShape(p: IPoint): boolean {
+        return true;
     }
 
     public destroyed(): void {

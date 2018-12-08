@@ -59,7 +59,7 @@ export default class Rectangular extends Shape {
     /**
      * 按照顺时针排序
      */
-    public srot(): void {
+    public sort(): void {
         // TODO sort
     }
 
