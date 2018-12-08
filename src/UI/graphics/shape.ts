@@ -53,7 +53,6 @@ export default abstract class Shape extends Log {
      */
     public on(name: string, cb: Function): void {
         // 兼容如果在bind之前先绑定事件的情况
-
         if (!this.mouseEvent) {
             this.eventCache.push({
                 name,
