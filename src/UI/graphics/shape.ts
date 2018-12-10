@@ -7,8 +7,8 @@ import Log from '@/basic/log';
 import EventCenter from '@/event/event-center';
 import MouseEvent from '@/event/mouse';
 import { IeventHandler, isMouseType, mouseType } from '@/interface/event';
-import Path from '@/UI/path';
 import { IPoint } from '@/interface/point';
+import Path from '@/UI/path';
 
 /**
  * default class
@@ -67,6 +67,7 @@ export default abstract class Shape extends Log {
                 handler: cb,
             });
             this.mouseEvent.on(name, cb);
+
             return;
         }
 

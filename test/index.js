@@ -11,6 +11,9 @@ window.onload = () => {
         borderRadius: 20,
         boxSizing: 'border-box',
     });
+    const c = new core.ellipsis({
+        radiusX: 20,
+    });
     const fn = data => {
         console.log(data);
         a.off('click', fn);
@@ -20,6 +23,7 @@ window.onload = () => {
     // });
     a.on('click', fn);
     canvas.add(a);
+    canvas.add(c);
 
     document.body.appendChild(canvas.dom);
     canvas.render();
