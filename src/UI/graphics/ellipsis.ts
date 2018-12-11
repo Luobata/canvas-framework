@@ -34,11 +34,11 @@ const defaultConf: ICircleConfig = {
 export default class Ellipsis extends Shape {
     public config: ICircleConfig;
 
-    constructor(conf: ICircleConfig) {
+    constructor(conf?: ICircleConfig) {
         super();
         this.config = {
             ...defaultConf,
-            ...conf,
+            ...(conf || {}),
         };
     }
 

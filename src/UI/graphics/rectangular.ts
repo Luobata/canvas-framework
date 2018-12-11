@@ -43,11 +43,11 @@ const defaultConf: IRectangularConfig = {
 export default class Rectangular extends Shape {
     public config: IRectangularConfig;
 
-    constructor(conf: IRectangularConfig) {
+    constructor(conf?: IRectangularConfig) {
         super();
         this.config = {
             ...defaultConf,
-            ...conf,
+            ...(conf || {}),
         };
         this.pathInit();
     }
