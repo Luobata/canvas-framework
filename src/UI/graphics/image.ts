@@ -1,6 +1,7 @@
 /**
  * @desc circle / ellipsis
  */
+import { IPoint } from '@/interface/point';
 import Shape from '@/UI/graphics/shape';
 
 /**
@@ -18,4 +19,14 @@ export default class Image extends Shape {
     public render(): void {}
 
     public pathInit(): void {}
+
+    /**
+     * load img src
+     * @param res
+     */
+    public load(res: string): Promise {
+        return new Promise((resolve: Function, reject: Function) => {});
+    }
+
+    public animation(): void {}
 }
