@@ -24,7 +24,7 @@ export default class Image extends Shape {
      * load img src
      * @param res
      */
-    public load(res: string): Promise {
+    public load(res: string): Promise<any> {
         return new Promise((resolve: Function, reject: Function) => {});
     }
 

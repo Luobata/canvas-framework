@@ -5,7 +5,7 @@ import { IPoint } from '@/interface/point';
 import Shape from '@/UI/graphics/shape';
 import Path from '@/UI/path';
 
-interface ICircleConfig {
+export interface IEllipsisConfig {
     // 圆心位置
     x: number;
     y: number;
@@ -18,7 +18,7 @@ interface ICircleConfig {
     borderColor?: string;
 }
 
-const defaultConf: ICircleConfig = {
+export const defaultEllipsisConf: IEllipsisConfig = {
     x: 200,
     y: 200,
     radiusX: 100,
@@ -32,12 +32,12 @@ const defaultConf: ICircleConfig = {
  * default class
  */
 export default class Ellipsis extends Shape {
-    public config: ICircleConfig;
+    public config: IEllipsisConfig;
 
-    constructor(conf?: ICircleConfig) {
+    constructor(conf?: IEllipsisConfig) {
         super();
         this.config = {
-            ...defaultConf,
+            ...defaultEllipsisConf,
             ...(conf || {}),
         };
     }
