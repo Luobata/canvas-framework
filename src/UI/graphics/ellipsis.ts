@@ -36,7 +36,6 @@ export default class Ellipsis extends Shape {
     public config: IEllipsisConfig;
 
     constructor(conf?: IEllipsisConfig, basicConf?: IShapeBasic) {
-        console.log(basicConf);
         super(basicConf);
         this.config = {
             ...defaultEllipsisConf,
