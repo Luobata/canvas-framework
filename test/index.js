@@ -14,9 +14,19 @@ window.onload = () => {
     const c = new core.ellipsis({
         radiusX: 20,
     });
-    const d = new core.circle({
-        x: 400,
+    const d = new core.circle(
+        {
+            x: 400,
+            radius: 20,
+        },
+        {
+            zIndex: 10,
+        },
+    );
+    const e = new core.circle({
+        x: 430,
         radius: 20,
+        backgroundColor: 'red',
     });
     const fn = data => {
         console.log(data);
@@ -29,6 +39,7 @@ window.onload = () => {
     // canvas.add(a);
     canvas.add(c);
     canvas.add(d);
+    canvas.add(e);
 
     document.body.appendChild(canvas.dom);
     canvas.render();

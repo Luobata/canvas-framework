@@ -22,6 +22,9 @@ export default class Frame {
     public render(): void {
         // TODO 如果有动画处理的时候的处理逻辑
         requestAnimationFrame(() => {
+            this.contextList.sort((a: context, b: context) => {
+                return b.zIndex - a.zIndex;
+            });
             for (const i of this.contextList) {
                 i.render();
             }

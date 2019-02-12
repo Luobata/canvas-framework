@@ -8,6 +8,7 @@ import EventCenter from '@/event/event-center';
 import MouseEvent from '@/event/mouse';
 import { IeventHandler, isMouseType, mouseType } from '@/interface/event';
 import { IPoint } from '@/interface/point';
+import { IShapeBasic } from '@/interface/shape';
 import Path from '@/UI/path';
 
 /**
@@ -16,6 +17,7 @@ import Path from '@/UI/path';
 export default abstract class Shape extends Log {
     public mouseEvent: MouseEvent;
     public path: Path;
+    public zIndex: number = 0;
 
     protected ctx: CanvasRenderingContext2D;
     protected pixealRatio: number;
@@ -25,8 +27,12 @@ export default abstract class Shape extends Log {
     // eventList用于存储所有绑定的事件
     private eventList: IeventHandler[] = [];
 
-    constructor() {
+    constructor(conf?: IShapeBasic) {
         super();
+
+        if (conf) {
+            this.zIndex = conf.zIndex || 0;
+        }
     }
 
     /**

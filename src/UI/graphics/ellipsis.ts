@@ -2,6 +2,7 @@
  * @desc circle / ellipsis
  */
 import { IPoint } from '@/interface/point';
+import { IShapeBasic } from '@/interface/shape';
 import Shape from '@/UI/graphics/shape';
 import Path from '@/UI/path';
 
@@ -34,8 +35,9 @@ export const defaultEllipsisConf: IEllipsisConfig = {
 export default class Ellipsis extends Shape {
     public config: IEllipsisConfig;
 
-    constructor(conf?: IEllipsisConfig) {
-        super();
+    constructor(conf?: IEllipsisConfig, basicConf?: IShapeBasic) {
+        console.log(basicConf);
+        super(basicConf);
         this.config = {
             ...defaultEllipsisConf,
             ...(conf || {}),

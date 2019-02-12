@@ -6,6 +6,7 @@ import ellipsis, {
     defaultEllipsisConf,
     IEllipsisConfig,
 } from '@/UI/graphics/ellipsis';
+import { IShapeBasic } from '@/interface/shape';
 
 type ICircleConfig = IEllipsisConfig & {
     radius: number;
@@ -33,8 +34,8 @@ function formatConf(conf: ICircleConfig): ICircleConfig {
  * default class
  */
 export default class circle extends ellipsis {
-    constructor(conf: ICircleConfig) {
-        super(formatConf(conf));
+    constructor(conf?: ICircleConfig, basicConf?: IShapeBasic) {
+        super(formatConf(conf), basicConf);
     }
 
     public onShape(p: IPoint): boolean {
