@@ -31,7 +31,7 @@ export default abstract class Shape extends Log {
         super();
 
         if (conf) {
-            this.zIndex = conf.zIndex || 0;
+            this.zIndex = conf.zIndex;
         }
     }
 

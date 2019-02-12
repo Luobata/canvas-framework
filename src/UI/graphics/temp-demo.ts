@@ -1,8 +1,9 @@
 /**
  * @desc circle / ellipsis
  */
-import Shape from '@/UI/graphics/shape';
 import { IPoint } from '@/interface/point';
+import Shape from '@/UI/graphics/shape';
+// tslint:disable
 
 /**
  * default class

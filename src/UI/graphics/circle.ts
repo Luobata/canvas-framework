@@ -2,11 +2,11 @@
  * @desc circle / ellipsis
  */
 import { IPoint } from '@/interface/point';
-import ellipsis, {
+import { IShapeBasic } from '@/interface/shape';
+import Ellipsis, {
     defaultEllipsisConf,
     IEllipsisConfig,
 } from '@/UI/graphics/ellipsis';
-import { IShapeBasic } from '@/interface/shape';
 
 type ICircleConfig = IEllipsisConfig & {
     radius: number;
@@ -33,7 +33,7 @@ function formatConf(conf: ICircleConfig): ICircleConfig {
 /**
  * default class
  */
-export default class circle extends ellipsis {
+export default class Circle extends Ellipsis {
     constructor(conf?: ICircleConfig, basicConf?: IShapeBasic) {
         super(formatConf(conf), basicConf);
     }
@@ -44,5 +44,5 @@ export default class circle extends ellipsis {
 
     // public render(): void {}
 
-    public pathInit(): void {}
+    // public pathInit(): void {}
 }

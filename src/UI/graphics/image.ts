@@ -4,6 +4,7 @@
 import { IPoint } from '@/interface/point';
 import Shape from '@/UI/graphics/shape';
 
+// tslint:disable
 /**
  * default class
  */
@@ -16,17 +17,25 @@ export default class Image extends Shape {
         return true;
     }
 
-    public render(): void {}
+    public render(): void {
+        // TODO
+    }
 
-    public pathInit(): void {}
+    public pathInit(): void {
+        // TODO
+    }
 
     /**
      * load img src
      * @param res
      */
-    public load(res: string): Promise<any> {
-        return new Promise((resolve: Function, reject: Function) => {});
-    }
+    // public load(res: string): Promise<any> {
+    //     return new Promise(
+    //         (resolve: Function, reject: Function): Function => {},
+    //     );
+    // }
 
-    public animation(): void {}
+    public animation(): void {
+        // TODO
+    }
 }
