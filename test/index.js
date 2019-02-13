@@ -28,6 +28,12 @@ window.onload = () => {
         radius: 20,
         backgroundColor: 'red',
     });
+    const f = new core.image({
+        x: 430,
+        y: 430,
+        width: 100,
+        height: 100,
+    });
     const fn = data => {
         console.log(data);
         a.off('click', fn);
@@ -42,6 +48,11 @@ window.onload = () => {
     canvas.add(e);
 
     document.body.appendChild(canvas.dom);
-    canvas.render();
+    f.load(
+        'http://sf3-ttcdn-tos.pstatp.com/obj/web.business.image/201902135d0d38ffba7c95434b1097e7',
+    ).then(() => {
+        canvas.add(f);
+        canvas.render();
+    });
     // const b = new core.shape();
 };
