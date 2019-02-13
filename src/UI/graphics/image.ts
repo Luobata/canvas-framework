@@ -92,12 +92,7 @@ export default class ImageItem extends Shape {
         return new Promise(
             (resolve: Function, reject: Function): void => {
                 image.onload = (): void => {
-                    if (!this.config.width) {
-                        this.config.width = image.width;
-                    }
-                    if (!this.config.height) {
-                        this.config.height = image.height;
-                    }
+                    this.imageMatch(image.width, image.height);
                     this.pathInit();
                     this.imageFile = image;
                     resolve(image);
@@ -108,5 +103,36 @@ export default class ImageItem extends Shape {
 
     public animation(): void {
         // TODO
+    }
+
+    // 等比例补全宽高
+    private imageMatch(width: number, height: number): void {
+        // 补全的同时需要等比例
+
+        if (this.config.width && this.config.height) {
+            return;
+        }
+
+        // 都没有直接赋值
+        if (!this.config.width && !this.config.height) {
+            this.config.width = width;
+            this.config.height = height;
+
+            return;
+        }
+
+        // 只有宽度
+        if (this.config.width) {
+            this.config.height = height * (this.config.width / width);
+
+            return;
+        }
+
+        // 只有高度
+        if (this.config.height) {
+            this.config.width = width * (this.config.height / height);
+
+            return;
+        }
     }
 }

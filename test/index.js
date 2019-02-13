@@ -32,7 +32,7 @@ window.onload = () => {
         x: 430,
         y: 430,
         width: 100,
-        height: 100,
+        // height: 100,
     });
     const fn = data => {
         console.log(data);
