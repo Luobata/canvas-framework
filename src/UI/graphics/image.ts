@@ -85,11 +85,12 @@ export default class ImageItem extends Shape {
      * @params src: image src
      */
     // tslint:disable-next-line no-any no-unsafe-any
-    public load(src: string): Promise<any> {
+    public async load(src: string): Promise<any> {
         const image: HTMLImageElement = new Image();
         image.src = src;
 
         return new Promise(
+            // tslint:disable-next-line no-any no-unsafe-any
             (resolve: Function, reject: Function): void => {
                 image.onload = (): void => {
                     this.imageMatch(image.width, image.height);
