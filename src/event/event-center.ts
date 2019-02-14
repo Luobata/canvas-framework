@@ -103,7 +103,10 @@ export default class EventCenter {
                 this.canvas.dom.addEventListener(
                     v,
                     (me: MouseEvent): void => {
-                        if (this.eventDispatchList.mouse[v].length) {
+                        if (
+                            this.eventDispatchList.mouse[v] &&
+                            this.eventDispatchList.mouse[v].length
+                        ) {
                             for (const i of this.eventDispatchList.mouse[v]) {
                                 // TODO point的计算计算方式 应该相对成canvas的位置 可能需要调整
                                 if (
