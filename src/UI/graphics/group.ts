@@ -42,6 +42,9 @@ export default class Group extends Shape {
         // add 了之后需要重新pathInit
         this.list.push(shape);
         shape.pathInit(this.config.position);
+        this.list.sort((a: Shape, b: Shape) => {
+            return b.zIndex - a.zIndex;
+        });
     }
 
     public setPosition(p: IPoint): void {
