@@ -21,7 +21,7 @@ const defautlGroupConfig: IGroupConfig = {
 /**
  * default class
  */
-export default class Group extends Log {
+export default class Group extends Shape {
     public list: Shape[] = [];
     public config: IGroupConfig;
 
@@ -60,5 +60,7 @@ export default class Group extends Log {
         );
     }
 
-    // public pathInit(): void {}
+    public pathInit(): void {
+        // TODO
+    }
 }

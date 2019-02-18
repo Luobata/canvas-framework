@@ -4,9 +4,10 @@
 import { isString } from '@/basic/type';
 import EventCenter from '@/event/event-center';
 import Frame from '@/UI/frame';
+import Group from '@/UI/graphics/group';
 import Shape from '@/UI/graphics/shape';
 
-export type context = Shape;
+export type context = Shape | Group;
 
 export interface ICanvasConf {
     width: number;

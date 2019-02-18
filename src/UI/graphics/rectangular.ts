@@ -102,7 +102,7 @@ export default class Rectangular extends Shape {
         this.ctx.restore();
     }
 
-    protected pathInit(p?: IPoint): void {
+    public pathInit(p?: IPoint): void {
         if (p) {
             this.config.x += p.x;
             this.config.y += p.y;

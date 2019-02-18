@@ -123,7 +123,7 @@ export default abstract class Shape extends Log {
      * abstract method
      * init the path
      */
-    protected abstract pathInit(): void;
+    public abstract pathInit(p?: IPoint): void;
 
     /**
      * init all the event

@@ -77,8 +77,7 @@ export default class Ellipsis extends Shape {
         this.ctx.restore();
     }
 
-    // public pathInit(): void {
-    protected pathInit(p?: IPoint): void {
+    public pathInit(p?: IPoint): void {
         if (p) {
             this.config.x += p.x;
             this.config.y += p.y;
