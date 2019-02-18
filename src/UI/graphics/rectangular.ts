@@ -102,7 +102,12 @@ export default class Rectangular extends Shape {
         this.ctx.restore();
     }
 
-    protected pathInit(): void {
+    protected pathInit(p?: IPoint): void {
+        if (p) {
+            this.config.x += p.x;
+            this.config.y += p.y;
+        }
+
         const border: number = this.config.borderColor
             ? this.config.borderWidth / 2
             : 0;

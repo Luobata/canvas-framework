@@ -77,7 +77,12 @@ export default class Ellipsis extends Shape {
         this.ctx.restore();
     }
 
-    public pathInit(): void {
+    // public pathInit(): void {
+    protected pathInit(p?: IPoint): void {
+        if (p) {
+            this.config.x += p.x;
+            this.config.y += p.y;
+        }
         this.path = new Path([]);
         // none 椭圆不需要path
     }
